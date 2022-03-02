@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Pressable, Image } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -38,10 +38,18 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+function LogoTitle(){
+  return (
+    <Image
+      style={{ width: 175, height: 50 }}
+      source={require('../assets/images/feelthebeat-03.png')}
+    />  )
+}
+
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false  }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -71,6 +79,7 @@ function BottomTabNavigator() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          headerTitle: (props) => <LogoTitle {...props} /> 
         }}
       />
 
@@ -80,6 +89,7 @@ function BottomTabNavigator() {
         options={{
           title: 'Events',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerTitle: (props) => <LogoTitle {...props} /> 
         }}
       />
 
@@ -89,6 +99,7 @@ function BottomTabNavigator() {
         options={{
           title: 'Videos',
           tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
+          headerTitle: (props) => <LogoTitle {...props} /> 
         }}
       />
       
@@ -98,6 +109,7 @@ function BottomTabNavigator() {
         options={{
           title: 'About',
           tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
+          headerTitle: (props) => <LogoTitle {...props} /> 
         }}
       />
     </BottomTab.Navigator>

@@ -1,15 +1,30 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, ScrollView } from 'react-native';
+import { Card, Button, Icon } from 'react-native-elements';
 import { Text, View } from '../components/Themed';
+import { EventDataLoader } from '../services/DataSources'; 
+
 
 export default function EventsScreen() {
+  const events = EventDataLoader(); 
+
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Text style={styles.title}>Events</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-
-      Events Page
+      
+      {events.data.map((event, index) => {
+        return (
+          <Card key={index}>
+          <Card.Title>{event.event}</Card.Title>
+          <Card.Divider />
+          {event.date} - {event.price} <br/>
+          {event.description}
+        </Card>
+        )
+      })}
     </View>
+    </ScrollView>
   );
 }
 
